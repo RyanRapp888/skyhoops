@@ -32,11 +32,10 @@ int main(int argc, char *argv[])
 	std::vector<double> out_thetas;
 	lrs.SolveUsingClosedFormNormalEquation(out_thetas);
 
-	std::vector<double> in_thetas = { 0 };
-	for (int aa = 0; aa < 20; aa++)
-	{
-		in_thetas[0] = aa / (double) 20;
-		std::cout << "(theta, cost) = (" << in_thetas[0] << "," << lrs.ComputeCost(in_thetas) << ")" <<  std::endl;
-	}
+	// This stuff is just for fun.
+	
+
+	int abc;
+	std::cin >> abc;
 }
 

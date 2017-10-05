@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 
-bool LoadCSV(const std::string &csv_filename, std::vector< std::shared_ptr<std::vector<double> > > column_data)
+bool LoadCSV(const std::string &csv_filename, std::vector< std::shared_ptr<std::vector<double> > > &column_data)
 {
 	std::ifstream input_file(csv_filename);
 	if (!input_file.is_open())
@@ -68,4 +68,5 @@ bool LoadCSV(const std::string &csv_filename, std::vector< std::shared_ptr<std::
 			}
 		}
 	}
+	return column_data.size() > 0;
 }

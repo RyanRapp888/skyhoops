@@ -13,6 +13,7 @@ public:
 		std::shared_ptr< std::vector<double> > y);
 
 	void SolveUsingClosedFormNormalEquation(std::vector<double> &out_thetas) const;
+	void SolveUsingGradientDescent(std::vector<double> &out_thetas) const;
 	void PrintSourceData() const;
 	double ComputeCost(std::vector<double> &in_thetas) const;
 

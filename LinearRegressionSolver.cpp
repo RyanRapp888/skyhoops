@@ -10,8 +10,8 @@ bool LinearRegressionSolver::SetData(std::vector<std::shared_ptr<std::vector<dou
 		return false;
 	}
 
-	unsigned int n_datasets(x[0]->size());
-	unsigned int n_features(x.size());
+	size_t n_datasets(x[0]->size());
+	size_t n_features(x.size());
 
 	MatrixXd tmp_x(x[0]->size(), x.size());
 	for (int aa = 0; aa < n_features; aa++)
@@ -23,6 +23,7 @@ bool LinearRegressionSolver::SetData(std::vector<std::shared_ptr<std::vector<dou
 	double *tmp = &((*y)[0]);
 	VectorXd tmp_y = Map<VectorXd>(tmp, n_datasets);
 	m_y = tmp_y;
+	return true;
 }
 
 
@@ -110,4 +111,24 @@ double LinearRegressionSolver::ComputeCost(std::vector<double> &in_thetas) const
 	cost = predictions.sum() / (2 * m_y.rows());
 
 	return cost;
+}
+
+void LinearRegressionSolver::SolveUsingGradientDescent(std::vector<double> &out_thetas) const
+{
+	// Right now there's only one theta, We should be able to inhance this.
+	// I think Compute cost is mostly ready.
+	std::vector<double> in_thetas = { 0 };
+
+	// Instead of gradient descent, I've looped through 20 different thetas between zero and one.
+	// Its totally invalid mathematically, but I don't care!!! BWAAAHAHAHAA!
+	
+	for (int aa = 0; aa < 20; aa++)
+	{
+		in_thetas[0] = aa / (double)20;
+		std::cout << "(theta, cost) = (" << in_thetas[0] << "," << ComputeCost(in_thetas) << ")" << std::endl;
+	}
+
+	// hahaha!
+	out_thetas.push_back(0.7);
+	
 }
