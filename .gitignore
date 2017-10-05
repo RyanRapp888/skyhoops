@@ -1,0 +1,9 @@
+
+LinRegProject/.vs/
+*.obj
+*.log
+*.tlog
+*.ilk
+*.pdb
+*.idb
+*.exe
