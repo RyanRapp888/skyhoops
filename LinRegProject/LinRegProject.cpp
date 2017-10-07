@@ -30,10 +30,10 @@ int main(int argc, char *argv[])
 	lrs.SetData(column_data, input_ydata);
 	//lrs.PrintSourceData();
 	std::vector<double> out_thetas;
-	lrs.SolveUsingClosedFormNormalEquation(out_thetas);
-
-	// This stuff is just for fun.
-	
+	//lrs.SolveUsingClosedFormNormalEquation(out_thetas);
+	int n_iterations = 50;
+	double alpha = 1;
+	lrs.SolveUsingGradientDescent(n_iterations, alpha, out_thetas);
 
 	int abc;
 	std::cin >> abc;
