@@ -51,35 +51,35 @@ bool LinearRegressionSolver::ValidateSourceData(
 	std::shared_ptr< std::vector<double> > y) const
 {
 	int n_datasets(0);
-	int n_features(x.size());
+int n_features(x.size());
 
-	if (n_features > 0)
+if (n_features > 0)
+{
+	n_datasets = x[0]->size();
+}
+else
+{
+	std::cout << "Error: x is empty" << std::endl;
+	return false;
+}
+
+for (int aa = 1; aa < x.size(); aa++)
+{
+	if (x[aa]->size() != n_datasets)
 	{
-		n_datasets = x[0]->size();
-	}
-	else
-	{
-		std::cout << "Error: x is empty" << std::endl;
+		std::cout << "Error: x requires each column to have the same number of rows" << std::endl;
 		return false;
 	}
 
-	for (int aa = 1; aa < x.size(); aa++)
-	{
-		if (x[aa]->size() != n_datasets)
-		{
-			std::cout << "Error: x requires each column to have the same number of rows" << std::endl;
-			return false;
-		}
+}
 
-	}
+if (y->size() != n_datasets)
+{
+	std::cout << "Error: y data must have the same number of rows as x data" << std::endl;
+	return false;
+}
 
-	if (y->size() != n_datasets)
-	{
-		std::cout << "Error: y data must have the same number of rows as x data" << std::endl;
-		return false;
-	}
-
-	return true;
+return true;
 }
 
 // This will use m_x as input and m_y as target goal
@@ -124,12 +124,51 @@ double LinearRegressionSolver::ComputeCost(const MatrixXd &X, const MatrixXd &y,
 
 void LinearRegressionSolver::NormalizeFeatures()
 {
-   
+	MatrixXd X_norm = m_x;
+	int n_features = m_x.cols();
+	int n_datasets = m_x.rows();
+	std::vector<double> means_per_feature(n_features, 0);
+	std::vector<double> sigmas_per_feature(n_features, 0);
+
+	// standard deviation same as octave
+	// sqrt(1 / (N - 1) SUM_i(x(i) - mean(x)) ^ 2)
+
+
+	for (int curfeat = 0; curfeat < n_features; curfeat++)
+	{
+		means_per_feature[curfeat] = m_x.col(curfeat).mean();
+
+		double stand_dev_accum(0);
+		for (int aa = 0; aa < n_datasets; aa++)
+		{
+			stand_dev_accum += pow(m_x(aa, curfeat) - means_per_feature[curfeat], 2);
+		}
+		double tmp = (1.0f / (n_datasets - 1)) * stand_dev_accum;
+		sigmas_per_feature[curfeat] = sqrt(tmp);
+	}
+
+	for (int curfeat2 = 0; curfeat2 < n_features; curfeat2++)
+	{
+		if (sigmas_per_feature[curfeat2] > 0.00001 ||
+			sigmas_per_feature[curfeat2] < -0.00001)
+		{
+			for (int currow = 0; currow < n_datasets; currow++)
+			{
+				X_norm(currow, curfeat2) = (m_x(currow, curfeat2) - means_per_feature[curfeat2]) / sigmas_per_feature[curfeat2];
+			}
+		}
+		else
+		{
+			X_norm.col(curfeat2).setZero();
+		}
+	}
+	m_x = X_norm;
 }
 
 
 void LinearRegressionSolver::SolveUsingGradientDescent(int n_iterations, double alpha, std::vector<double> &out_thetas) const
 {
+	
 	//Insert a column of ones into m_x
 	MatrixXd tmp_x = MatrixXd(m_x.rows(), m_x.cols()+1);
 	tmp_x.col(0).setOnes();

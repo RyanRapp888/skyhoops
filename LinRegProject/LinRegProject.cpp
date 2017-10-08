@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
 	//lrs.SolveUsingClosedFormNormalEquation(out_thetas);
 	int n_iterations = 50;
 	double alpha = 1;
+	lrs.NormalizeFeatures();
 	lrs.SolveUsingGradientDescent(n_iterations, alpha, out_thetas);
 
 	int abc;
