@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	column_data.pop_back();
 
 	LinearRegressionSolver lrs;
-	lrs.SetData(column_data, input_ydata);
+	lrs.SetTrainingData(column_data, input_ydata);
 	//lrs.PrintSourceData();
 	std::vector<double> out_thetas;
 	//lrs.SolveUsingClosedFormNormalEquation(out_thetas);
@@ -36,7 +36,13 @@ int main(int argc, char *argv[])
 	lrs.NormalizeFeatures();
 	lrs.SolveUsingGradientDescent(n_iterations, alpha, out_thetas);
 
-	int abc;
+	std::vector<double> input = { 1650, 3 };
+	double prediction(0);
+	if (lrs.GetPrediction(input, prediction))
+	{
+		std::cout << "prediction = " << prediction << std::endl;
+	}
+	   int abc;
 	std::cin >> abc;
 }
 
