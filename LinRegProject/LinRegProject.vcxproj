@@ -47,11 +47,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\BaseSolver.cpp" />
     <ClCompile Include="..\JunkDrawerUtils.cpp" />
     <ClCompile Include="..\LinearRegressionSolver.cpp" />
     <ClCompile Include="LinRegProject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\BaseSolver.h" />
     <ClInclude Include="..\JunkDrawerUtils.h" />
     <ClInclude Include="..\LinearRegressionSolver.h" />
   </ItemGroup>
