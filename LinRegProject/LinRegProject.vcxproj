@@ -55,6 +55,13 @@
     <ClInclude Include="..\JunkDrawerUtils.h" />
     <ClInclude Include="..\LinearRegressionSolver.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="ex1data1.txt" />
+    <Text Include="ex1data2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tres.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
