@@ -55,11 +55,13 @@
   <ItemGroup>
     <ClInclude Include="..\BaseSolver.h" />
     <ClInclude Include="..\JunkDrawerUtils.h" />
+    <ClInclude Include="..\JunkMathUtils.h" />
     <ClInclude Include="..\LinearRegressionSolver.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ex1data1.txt" />
     <Text Include="ex1data2.txt" />
+    <Text Include="nba.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="tres.csv" />

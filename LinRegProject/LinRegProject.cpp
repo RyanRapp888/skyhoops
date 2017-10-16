@@ -2,10 +2,12 @@
 
 #include "LinearRegressionSolver.h"
 #include "JunkDrawerUtils.h"
+#include "JunkMathUtils.h"
 #include <iostream>
 
 int main(int argc, char *argv[])
 {
+    
 	if (argc != 2)
 	{
 		std::cout << "usage: linreg <csv file>" << std::endl;
@@ -31,18 +33,20 @@ int main(int argc, char *argv[])
 	//lrs.PrintSourceData();
 	std::vector<double> out_thetas;
 	//lrs.SolveUsingClosedFormNormalEquation(out_thetas);
-	int n_iterations = 50;
-	double alpha = 1;
-	lrs.NormalizeFeatures();
+	int n_iterations = 50000;
+	double alpha = .05;
+	//lrs.NormalizeFeatures();
 	lrs.SolveUsingGradientDescent(n_iterations, alpha, out_thetas);
 
-	std::vector<double> input = { 1650, 3 };
+	std::vector<double> input = { 30.08,8,18,1,4,2,2,1,4,5,3,5,1,4,0 };
 	double prediction(0);
 	if (lrs.GetPrediction(input, prediction))
 	{
 		std::cout << "prediction = " << prediction << std::endl;
 	}
-	   int abc;
+	
+   int abc;
 	std::cin >> abc;
+	
 }
 

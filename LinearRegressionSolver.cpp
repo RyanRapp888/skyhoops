@@ -1,5 +1,6 @@
 #pragma once
 #include "LinearRegressionSolver.h"
+#include "JunkMathUtils.h"
 #include <iostream>
 
 /* **************************************
@@ -14,7 +15,10 @@ void LinearRegressionSolver::SolveUsingClosedFormNormalEquation(
 	std::vector<double> &out_thetas)
 {
 	MatrixXd tmp_out_thetas;
-	tmp_out_thetas = (m_training_x.transpose() * m_training_x).inverse() * m_training_x.transpose() * m_training_y;
+	MatrixXd tmp2(m_training_x.transpose() * m_training_x);
+	pseudoInverse(tmp2);
+	tmp_out_thetas = tmp2 * m_training_x.transpose() * m_training_y;
+//	tmp_out_thetas = pseudoInverse((m_training_x.transpose() * m_training_x)) * m_training_x.transpose() * m_training_y;
 
 	int n_rows = tmp_out_thetas.rows();
 	int n_cols = tmp_out_thetas.cols();

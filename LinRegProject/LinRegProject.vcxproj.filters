@@ -38,12 +38,18 @@
     <ClInclude Include="..\BaseSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\JunkMathUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ex1data1.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="ex1data2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="nba.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
